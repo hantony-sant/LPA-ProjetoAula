@@ -17,7 +17,8 @@ class Menu:
         pygame.mixer_music.set_volume(0.2)  # define volume
         while True:
             self.window.blit(source=self.surf, dest=self.rect)  # desenha a imagem na surface
-            self.menu_text(50, "Moutain", (255, 128, 0), ((WIN_WIDTH / 2), 70))
+            self.menu_text(50, "Moutain", (255, 128, 0), ((WIN_WIDTH / 2), 40))
+            self.menu_text(50, "Shooter", (255, 128, 0), ((WIN_WIDTH / 2), 70))
             pygame.display.flip()  # atualiza a tela
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
