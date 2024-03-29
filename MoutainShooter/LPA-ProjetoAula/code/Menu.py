@@ -9,11 +9,11 @@ from code.Const import WIN_WIDTH, COLOR_ORANGE, MENU_OPTION, COLOR_WHITE, COLOR_
 class Menu:
     def __init__(self, window):
         self.window: Surface = window
-        self.surf = pygame.image.load('./assets/images/menuBg.png')
+        self.surf = pygame.image.load('./assets/images/menuBg.png').convert_alpha()
         self.rect = self.surf.get_rect(left=0, top=0)  # pega a imagem (surface) e atribui a uma pos no rect
 
     def run(self):
-        pygame.mixer_music.load('./assets/sounds/menuSong2.mp3')  # carrega música do menu
+        pygame.mixer_music.load('./assets/sounds/menuSong.mp3')  # carrega música do menu
         pygame.mixer_music.play(-1)  # roda a música infinitamente
         pygame.mixer_music.set_volume(0.2)  # define volume
         menu_option = 0
@@ -51,6 +51,6 @@ class Menu:
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
         text_font: Font = pygame.font.SysFont(name="Consolas", size=text_size)  # definindo fonte
-        text_surf: Surface = text_font.render(text, True, text_color)  # Renderizando fonte
+        text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()  # Renderizando fonte
         text_rect: Rect = text_surf.get_rect(center=text_center_pos)  # pegando pos do text
         self.window.blit(source=text_surf, dest=text_rect)  # desenhando tudo
