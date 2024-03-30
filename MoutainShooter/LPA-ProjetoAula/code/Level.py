@@ -1,10 +1,11 @@
 import sys
+import random
 
 import pygame.display
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import COLOR_WHITE
+from code.Const import COLOR_WHITE, MENU_OPTION, EVENT_ENEMY
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
 
@@ -17,6 +18,11 @@ class Level:
         self.entity_list: list[Entity] = []
         self.entity_list.extend(EntityFactory.get_entity('Level1Bg'))  # extends- a minha lista com base nesse elementos
         self.entity_list.append(EntityFactory.get_entity('Player1'))
+        if menu_option in [MENU_OPTION[1], MENU_OPTION[2]]:
+            self.entity_list.append(EntityFactory.get_entity('Player2'))
+
+        # geração de inimigos
+        pygame.time.set_timer(EVENT_ENEMY, 2000)
 
     def run(self, ):
         pygame.mixer_music.load(f'./assets/sounds/{self.name}.mp3')  # carrega música do level
@@ -34,6 +40,9 @@ class Level:
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+                if event.type == EVENT_ENEMY:
+                    choice = random.choice(('Enemy1', 'Enemy2'))
+                    self.entity_list.append(EntityFactory.get_entity(choice))
 
             pygame.display.flip()
 
