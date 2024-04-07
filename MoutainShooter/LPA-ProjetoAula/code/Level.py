@@ -8,6 +8,7 @@ from pygame.font import Font
 from code.Const import COLOR_WHITE, MENU_OPTION, EVENT_ENEMY
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
+from code.EntityMediator import EntityMediator
 
 
 class Level:
@@ -31,20 +32,28 @@ class Level:
         clock = pygame.time.Clock()
         while True:
             clock.tick(60)  # define uma taxa de FPS fixa
+            #  DESENHAR NA TELA
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf, dest=ent.rect)  # desenha as entidades
-                self.level_text(14, f'FPS: {clock.get_fps() :.0f}', COLOR_WHITE, (10, 10))
                 ent.move()  # faz a imagem se mover
+            #  executar o print
+            self.level_text(14, f'FPS: {clock.get_fps() :.0f}', COLOR_WHITE, (10, 10))
+            self.level_text(14, f'Entidades: {len(self.entity_list)}', COLOR_WHITE, (10, 30))
+            pygame.display.flip()
 
+            # VERIFICAR RELACIONAMENTOS DE ENTIDADES
+            EntityMediator.verify_collision(entity_list=self.entity_list)
+            EntityMediator.verify_health(entity_list=self.entity_list)
+
+            # CONFERIR EVENTOS
             for event in pygame.event.get():  # kit fechar janela
                 if event.type == pygame.QUIT:
                     pygame.quit()
                     sys.exit()
+
                 if event.type == EVENT_ENEMY:
                     choice = random.choice(('Enemy1', 'Enemy2'))
                     self.entity_list.append(EntityFactory.get_entity(choice))
-
-            pygame.display.flip()
 
     def level_text(self, text_size: int, text: str, text_color: tuple, text_pos: tuple):
         text_font: Font = pygame.font.SysFont(name="Consolas", size=text_size)  # definindo fonte

@@ -1,0 +1,25 @@
+
+from code.Enemy import Enemy
+from code.Entity import Entity
+
+
+class EntityMediator:
+
+    @staticmethod
+    def __verify_collision_window(ent: Entity):
+        if isinstance(ent, Enemy):  # entra nesse laço se essa Ent pertencer a inimigo
+            if ent.rect.right <= 0:
+                ent.health = 0
+
+    @staticmethod
+    def verify_collision(entity_list: list[Entity]):
+        for i in range(len(entity_list)):
+            entity1 = entity_list[i]
+            EntityMediator.__verify_collision_window(entity1)
+
+    @staticmethod
+    def verify_health(entity_list: list[Entity]):
+        for ent in entity_list:  # percorra todas a entidades dentro da lista
+            if ent.health <= 0:
+                entity_list.remove(ent)
+

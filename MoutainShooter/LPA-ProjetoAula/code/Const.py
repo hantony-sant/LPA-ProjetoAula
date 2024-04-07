@@ -17,6 +17,7 @@ MENU_OPTION = ('NEW GAME 1P',
 
 # E
 EVENT_ENEMY = pygame.USEREVENT + 1
+
 ENTITY_SPEED = {'Level1Bg0': 0,
                 'Level1Bg1': 1,
                 'Level1Bg2': 2,
@@ -25,10 +26,26 @@ ENTITY_SPEED = {'Level1Bg0': 0,
                 'Level1Bg5': 5,
                 'Level1Bg6': 6,
                 'Player1': 4,
+                'Player1Shot': 2,
                 'Player2': 4,
+                'Player2Shot': 3,
                 'Enemy1': 3,
                 'Enemy2': 2
                 }
+
+ENTITY_HEALTH = {'Level1Bg0': 999,
+                 'Level1Bg1': 999,
+                 'Level1Bg2': 999,
+                 'Level1Bg3': 999,
+                 'Level1Bg4': 999,
+                 'Level1Bg5': 999,
+                 'Level1Bg6': 999,
+                 'Player1': 300,
+                 'Player2': 300,
+                 'Enemy1': 200,
+                 'Enemy2': 200
+                }
+
 
 # P
 PLAYER_KEY_UP = {'Player1': pygame.K_UP,
