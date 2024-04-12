@@ -5,7 +5,7 @@ import pygame.display
 from pygame import Surface, Rect
 from pygame.font import Font
 
-from code.Const import COLOR_WHITE, MENU_OPTION, EVENT_ENEMY
+from code.Const import C_WHITE, MENU_OPTION, EVENT_ENEMY, C_RED, C_CYAN
 from code.Enemy import Enemy
 from code.Entity import Entity
 from code.EntityFactory import EntityFactory
@@ -43,10 +43,14 @@ class Level:
                     shoot = ent.shoot()
                     if shoot is not None:
                         self.entity_list.append(shoot)
+                if ent.name == 'Player1':
+                    self.level_text(14, f'Player1 - Health: {ent.health} | Score: {ent.score}', C_RED, (280, 10))
+                if ent.name == 'Player2':
+                    self.level_text(14, f'Player2 - Health: {ent.health} | Score: {ent.score}', C_CYAN, (280, 30))
 
             #  executar o print
-            self.level_text(14, f'FPS: {clock.get_fps() :.0f}', COLOR_WHITE, (10, 10))
-            self.level_text(14, f'Entidades: {len(self.entity_list)}', COLOR_WHITE, (10, 30))
+            self.level_text(14, f'FPS: {clock.get_fps() :.0f}', C_WHITE, (10, 10))
+            self.level_text(14, f'Entidades: {len(self.entity_list)}', C_WHITE, (10, 30))
             pygame.display.flip()
 
             # VERIFICAR RELACIONAMENTOS DE ENTIDADES
